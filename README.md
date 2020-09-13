@@ -1,5 +1,9 @@
 # Dotfiles
 
+<p align="center">
+<img src="preview.png">
+</p>
+
 ## Required Packages
 
 - oh-my-zsh
