@@ -40,3 +40,8 @@ ln -s $DIR/init.vim ~/.config/nvim/init.vim
 # execute this within neovim
 :PlugInstall
 ```
+
+## VSCode snippets
+```bash
+ln -s $DIR/snippets ~/.config/Code/user/snippets
+```
