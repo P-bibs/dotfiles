@@ -15,6 +15,13 @@ tex_header = """\\documentclass{article}
 \\newcommand{\\ZZ}{\\mathbb{Z}}
 \\newcommand{\\CC}{\\mathbb{C}}
 \\newcommand{\\RR}{\\mathbb{R}}
+\\newcommand{\\FF}{\\mathbb{F}}
+\\newcommand{\\HH}{\\mathbb{H}}
+\\newcommand{\\QQ}{\\mathbb{Q}}
+\\newcommand{\\CS}{\\mathcal{S}}
+\\newcommand{\\CL}{\\mathcal{L}}
+\\newcommand{\\CB}{\\mathcal{B}}
+\\newcommand{\\CA}{\\mathcal{A}}
 \\newcommand{\\hr}{\\underline{\\hspace*{\\textwidth}}}
 \\newcommand{\\bv}{\\boldsymbol{v}}
 \\newcommand{\\bw}{\\boldsymbol{w}}
@@ -26,7 +33,7 @@ Paul Biberstein\\\\
 MATH 1530\\\\
 __/__/20
 
-\\Huge\\textbf{Problem Set __} \\\\
+\\Huge\\textbf{Problem Set __} \\\\ \\\\
 \\huge\\textbf{_____________}
 \\normalsize
 """
