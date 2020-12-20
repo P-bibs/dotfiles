@@ -13,6 +13,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'tpope/vim-fugitive', {'branch': 'master'}
 Plug 'airblade/vim-rooter', {'branch': 'master'}
+Plug 'mhinz/vim-startify'
 call plug#end()
 
 " turn on line numbers
@@ -34,7 +35,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " toggle nerdtree with ctrl+n
-map <C-n> :NERDTreeToggle<CR>
+map <C-b> :NERDTreeToggle<CR>
 
 " disable nerdtree ctrl bindings to prevent interfering with pane switching
 let g:NERDTreeMapJumpNextSibling = ''
@@ -62,6 +63,7 @@ let g:coc_global_extensions = [
             \ 'coc-json',
             \ 'coc-vimtex',
             \ 'coc-tsserver',
+            \ 'coc-reason',
             \ 'coc-prettier'
             \]
 
