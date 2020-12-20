@@ -122,3 +122,11 @@ alias b="barva | /usr/share/barva/to-all-ttys.sh &"
 
 # alias docker-compose
 alias d-c="docker-compose"
+
+# add ardviz start script
+alias ardviz="/home/paul/Dropbox\ \(Brown\)/Personal/Projects/ArdViz/cava_method/start.sh"
+
+alias cat=bat
+
+# opam configuration
+test -r /home/paul/.opam/opam-init/init.zsh && . /home/paul/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

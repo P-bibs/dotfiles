@@ -1,16 +1,26 @@
 call plug#begin()
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'airblade/vim-gitgutter'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin' |
             \ Plug 'ryanoasis/vim-devicons'
+Plug 'plasticboy/vim-markdown'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'kevinoid/vim-jsonc'
+Plug 'junegunn/fzf.vim'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'tpope/vim-fugitive', {'branch': 'master'}
+Plug 'airblade/vim-rooter', {'branch': 'master'}
 call plug#end()
 
 " turn on line numbers
 set number
+
+" Reduce escape timeout
+set ttimeout
+set ttimeoutlen=0
 
 " type `:wrap` to turn on pretty line wrapping. `unwrap` to turn off
 command Wrap  execute "set wrap linebreak"
@@ -32,8 +42,60 @@ let g:NERDTreeMapJumpNextSibling = ''
 " show dot files in nerdtree
 let NERDTreeShowHidden=1
 
-" Use ripgrep for CtrlP fuzzy file finding
-if executable('rg')
-  let g:ctrlp_user_command = 'rg %s --files --hidden --color=never --glob ""'
+" Use spaces instead of tabs
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+
+" Add fzf mappings
+nnoremap <c-p> :Files<cr>
+
+" ============================ COC =====================
+
+let g:coc_global_extensions = [
+            \ 'coc-snippets', 
+            \ 'coc-vimlsp',
+            \ 'coc-spell-checker',
+            \ 'coc-syntax',
+            \ 'coc-git', 
+            \ 'coc-python',
+            \ 'coc-yaml',
+            \ 'coc-rust-analyzer',
+            \ 'coc-json',
+            \ 'coc-vimtex',
+            \ 'coc-tsserver',
+            \ 'coc-prettier'
+            \]
+
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" format
+nmap <space>F <Plug>(coc-format)
+
+" ======================= COC End =============================
