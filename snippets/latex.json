@@ -24,7 +24,7 @@
     "prefix": "2goals",
     "body": [
       "\\begin{align*}",
-      "\t&\\text{Goal (1): $1} \\\\",
+      "\t&\\text{Goal (1): $1} \\\\\\",
       "\t&\\text{Goal (2): $2}",
       "\\end{align*}",
       "$0"
@@ -34,8 +34,8 @@
     "prefix": "3goals",
     "body": [
       "\\begin{align*}",
-      "\t&\\text{Goal (1): $1} \\\\",
-      "\t&\\text{Goal (2): $2} \\\\",
+      "\t&\\text{Goal (1): $1} \\\\\\",
+      "\t&\\text{Goal (2): $2} \\\\\\",
       "\t&\\text{Goal (3): $3}",
       "\\end{align*}",
       "$0"
@@ -45,9 +45,9 @@
     "prefix": "4goals",
     "body": [
       "\\begin{align*}",
-      "\t&\\text{Goal (1): $1} \\\\",
-      "\t&\\text{Goal (2): $2} \\\\",
-      "\t&\\text{Goal (3): $3} \\\\",
+      "\t&\\text{Goal (1): $1} \\\\\\",
+      "\t&\\text{Goal (2): $2} \\\\\\",
+      "\t&\\text{Goal (3): $3} \\\\\\",
       "\t&\\text{Goal (4): $4}",
       "\\end{align*}",
       "$0"
