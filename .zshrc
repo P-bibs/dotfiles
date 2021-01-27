@@ -86,6 +86,9 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
+# Custom prompt additions to override theme (put prompt on newline and bold commands)
+PROMPT="${PROMPT}"$'\n'"$fg_bold[blue]➤ $fg_bold[white]"
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -107,6 +110,9 @@ export PATH="$PATH":"$HOME/Documents/Scripts"
 # Add Rust package manager dirs to PATH
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 export PATH="$PATH":"$HOME/.cargo/bin"
+
+# Add ruby gems to PATH
+export PATH="$PATH":"$HOME/.gem/ruby/2.7.0/bin"
 
 # set default editor to neovim
 export EDITOR="nvim"
@@ -130,3 +136,7 @@ alias cat=bat
 
 # opam configuration
 test -r /home/paul/.opam/opam-init/init.zsh && . /home/paul/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+# don't record commands temporarily when entering dangerous commands
+# alias incognito="if set | grep ^history$; then set -o history && echo 'history off'; else set +o history && echo 'history on'; fi"
+
