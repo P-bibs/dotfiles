@@ -6,6 +6,7 @@ Plug 'wakatime/vim-wakatime'
 Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin' |
             \ Plug 'ryanoasis/vim-devicons'
+Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'kevinoid/vim-jsonc'
@@ -22,6 +23,9 @@ set number
 " Reduce escape timeout
 set ttimeout
 set ttimeoutlen=0
+
+" map jj to exit escape remode
+inoremap jj <ESC>
 
 " type `:wrap` to turn on pretty line wrapping. `unwrap` to turn off
 command Wrap  execute "set wrap linebreak"
@@ -42,6 +46,9 @@ let g:NERDTreeMapJumpNextSibling = ''
 
 " show dot files in nerdtree
 let NERDTreeShowHidden=1
+
+" Disable mardown folding
+let g:vim_markdown_folding_disabled = 1
 
 " Use spaces instead of tabs
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
