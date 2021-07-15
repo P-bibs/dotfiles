@@ -65,7 +65,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose zsh-autosuggestions)
+plugins=(git docker docker-compose zsh-autosuggestions wd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -87,7 +87,7 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # Custom prompt additions to override theme (put prompt on newline and bold commands)
-PROMPT="${PROMPT}"$'\n'"$fg_bold[blue]➤ $fg_bold[white]"
+PROMPT="${PROMPT}"$'\n'"%{$fg_bold[blue]%}➤ %{$reset_color%}"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -102,7 +102,7 @@ alias please='echo $(fc -ln -1) ; sudo $(fc -ln -1)'
 alias pyfypi_up="curl pyfypi.devices.brown.edu:3001/start\?key=BrunoBoy"
 alias pyfypi_down="curl pyfypi.devices.brown.edu:3001/stop\?key=BrunoBoy"
 alias scratch="mkdir /tmp/scratch; touch /tmp/scratch/scratch; code /tmp/scratch"
-alias scratchn="mkdir /tmp/scratch; touch /tmp/scratch/scratch; nano /tmp/scratch/scratch"
+alias scratchn="mkdir /tmp/scratch; touch /tmp/scratch/scratch; nvim /tmp/scratch/scratch"
 
 alias c="cd ~/Dropbox\ \(Brown\)/Brown/Sophomore"
 export PATH="$PATH":"$HOME/Documents/Scripts"
@@ -113,6 +113,11 @@ export PATH="$PATH":"$HOME/.cargo/bin"
 
 # Add ruby gems to PATH
 export PATH="$PATH":"$HOME/.gem/ruby/2.7.0/bin"
+export PATH="$PATH":"$HOME/.local/share/gem/ruby/3.0.0/bin"
+export PATH="$PATH":"$HOME/.rbenv/versions/2.6.7/bin"
+
+# add support for rbenv
+eval "$(rbenv init -)"
 
 # set default editor to neovim
 export EDITOR="nvim"
@@ -120,19 +125,11 @@ export EDITOR="nvim"
 # Start MATLAB on the command line
 alias matlabnd="matlab -nojvm -nodisplay -nosplash"
 
-# setup environment variables for barva visualizer
-export BARVA_SOURCE=$(/usr/share/barva/pa-get-default-monitor.sh)
-export BARVA_BG=#002b36
-export BARVA_TARGET=#de3cd6
-alias b="barva | /usr/share/barva/to-all-ttys.sh &"
-
 # alias docker-compose
 alias d-c="docker-compose"
 
 # add ardviz start script
 alias ardviz="/home/paul/Dropbox\ \(Brown\)/Personal/Projects/ArdViz/cava_method/start.sh"
-
-alias cat=bat
 
 # opam configuration
 test -r /home/paul/.opam/opam-init/init.zsh && . /home/paul/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
