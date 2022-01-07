@@ -19,13 +19,14 @@ call plug#end()
 
 " turn on line numbers
 set number
+set relativenumber
 
 " Reduce escape timeout
 set ttimeout
 set ttimeoutlen=0
 
-" map jj to exit escape remode
-inoremap jj <ESC>
+" map jk to exit escape remode
+inoremap jk <ESC>
 
 " type `:wrap` to turn on pretty line wrapping. `unwrap` to turn off
 command Wrap  execute "set wrap linebreak"
@@ -38,7 +39,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " close vim if nerdtree is last open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" toggle nerdtree with ctrl+n
+" toggle nerdtree with ctrl+b
 map <C-b> :NERDTreeToggle<CR>
 
 " disable nerdtree ctrl bindings to prevent interfering with pane switching
@@ -69,10 +70,38 @@ let g:coc_global_extensions = [
             \ 'coc-rust-analyzer',
             \ 'coc-json',
             \ 'coc-vimtex',
+            \ 'coc-clangd',
             \ 'coc-tsserver',
-            \ 'coc-reason',
             \ 'coc-prettier'
             \]
+
+
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+set signcolumn=yes:1 " override above to always show line numbers and have coc/gitgutter compete
 
 " Use tab for trigger completion with characters ahead and navigate.
 inoremap <silent><expr> <TAB>
