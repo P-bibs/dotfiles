@@ -15,6 +15,9 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'tpope/vim-fugitive', {'branch': 'master'}
 Plug 'airblade/vim-rooter', {'branch': 'master'}
 Plug 'mhinz/vim-startify'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sensible'
 call plug#end()
 
 " turn on line numbers
@@ -27,6 +30,9 @@ set ttimeoutlen=0
 
 " map jk to exit escape remode
 inoremap jk <ESC>
+
+" use escape to exit terminal mode
+tnoremap <Esc> <C-\><C-n>
 
 " type `:wrap` to turn on pretty line wrapping. `unwrap` to turn off
 command Wrap  execute "set wrap linebreak"
@@ -52,10 +58,11 @@ let NERDTreeShowHidden=1
 let g:vim_markdown_folding_disabled = 1
 
 " Use spaces instead of tabs
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab expandtab
 
 " Add fzf mappings
-nnoremap <c-p> :Files<cr>
+nnoremap <c-p> :GFiles<cr>
+nnoremap <A-p> :Commands<cr>
 
 " ============================ COC =====================
 
@@ -72,7 +79,8 @@ let g:coc_global_extensions = [
             \ 'coc-vimtex',
             \ 'coc-clangd',
             \ 'coc-tsserver',
-            \ 'coc-prettier'
+            \ 'coc-prettier',
+            \ 'coc-go'
             \]
 
 
@@ -135,5 +143,9 @@ nmap <silent> gr <Plug>(coc-references)
 
 " format
 nmap <space>F <Plug>(coc-format)
+
+" enable switch between source and header
+nmap <A-o> :CocCommand clangd.switchSourceHeader<CR>
+
 
 " ======================= COC End =============================
