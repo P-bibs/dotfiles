@@ -1,3 +1,9 @@
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin()
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -18,7 +24,11 @@ Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sensible'
+Plug 'github/copilot.vim'
 call plug#end()
+
+" set leader to space
+let mapleader =" "
 
 " turn on line numbers
 set number
@@ -37,6 +47,10 @@ tnoremap <Esc> <C-\><C-n>
 " type `:wrap` to turn on pretty line wrapping. `unwrap` to turn off
 command Wrap  execute "set wrap linebreak"
 command Unwrap execute "set nowrap nolinebreak"
+
+" use leader as shortcut for splits
+nnoremap <leader>- :split<cr>
+nnoremap <leader>\| :vsplit<cr>
 
 " open nerdtree on startup when specifying no files
 autocmd StdinReadPre * let s:std_in=1
@@ -149,3 +163,4 @@ nmap <A-o> :CocCommand clangd.switchSourceHeader<CR>
 
 
 " ======================= COC End =============================
+
