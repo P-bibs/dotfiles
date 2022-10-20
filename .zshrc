@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/paul/.oh-my-zsh"
+export ZSH="/home/paul/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -65,7 +65,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker docker-compose zsh-autosuggestions wd)
+plugins=(git zsh-autosuggestions wd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -116,8 +116,7 @@ export PATH="$PATH":"$HOME/.gem/ruby/2.7.0/bin"
 export PATH="$PATH":"$HOME/.local/share/gem/ruby/3.0.0/bin"
 export PATH="$PATH":"$HOME/.rbenv/versions/2.6.7/bin"
 
-# add support for rbenv
-eval "$(rbenv init -)"
+export PATH="$PATH":"$HOME/builds/racket/bin"
 
 # set default editor to neovim
 export EDITOR="nvim"
@@ -136,4 +135,21 @@ test -r /home/paul/.opam/opam-init/init.zsh && . /home/paul/.opam/opam-init/init
 
 # don't record commands temporarily when entering dangerous commands
 # alias incognito="if set | grep ^history$; then set -o history && echo 'history off'; else set +o history && echo 'history on'; fi"
+
+source /usr/share/nvm/init-nvm.sh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/paul/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/paul/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/paul/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/paul/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
 

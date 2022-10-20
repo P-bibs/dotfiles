@@ -19,7 +19,6 @@ Plug 'kevinoid/vim-jsonc'
 Plug 'junegunn/fzf.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'tpope/vim-fugitive', {'branch': 'master'}
-Plug 'airblade/vim-rooter', {'branch': 'master'}
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -29,6 +28,12 @@ call plug#end()
 
 " set leader to space
 let mapleader =" "
+
+" source vimrc on save
+autocmd! BufWritePost $MYVIMRC source $MYVIMRC | echom "Reloaded $NVIMRC"
+
+" use backspace to switch to last buffer
+nnoremap <BS> <c-^>
 
 " turn on line numbers
 set number
@@ -77,6 +82,19 @@ set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab expandtab
 " Add fzf mappings
 nnoremap <c-p> :GFiles<cr>
 nnoremap <A-p> :Commands<cr>
+
+" ========================== AIRLINE ==================
+let g:airline_powerline_fonts = 1
+
+" fix to allow powerline symbols to wor
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+" ========================== AIRLINE end ==============
+
 
 " ============================ COC =====================
 
@@ -155,8 +173,47 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" format
+" allow checking type of value at cursor in OCaml
+" https://discuss.ocaml.org/t/type-at-point-ocaml-lsp-merlin-in-vim-neovim/6832
+nnoremap <silent> gh :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call CocShowDocumentation()<CR>
+function! CocShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting all code
 nmap <space>F <Plug>(coc-format)
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
 " enable switch between source and header
 nmap <A-o> :CocCommand clangd.switchSourceHeader<CR>
