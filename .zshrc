@@ -136,20 +136,7 @@ test -r /home/paul/.opam/opam-init/init.zsh && . /home/paul/.opam/opam-init/init
 # don't record commands temporarily when entering dangerous commands
 # alias incognito="if set | grep ^history$; then set -o history && echo 'history off'; else set +o history && echo 'history on'; fi"
 
-source /usr/share/nvm/init-nvm.sh
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/paul/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/paul/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/paul/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/paul/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+eval "$(github-copilot-cli alias -- "$0")"
 
+export PATH="/home/paul/.local/bin:$PATH"

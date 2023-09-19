@@ -1,0 +1,5 @@
+#!/bin/sh
+tmux new-session -d 'zsh'
+tmux send-keys 'nvim .' Enter
+tmux split-window -h 'zsh'
+tmux -2 attach-session -d

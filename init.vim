@@ -23,11 +23,16 @@ Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
+Plug 'tikhomirov/vim-glsl'
 Plug 'github/copilot.vim'
+Plug 'whonore/Coqtail'
 call plug#end()
 
 " set leader to space
 let mapleader =" "
+
+set mouse=
 
 " source vimrc on save
 autocmd! BufWritePost $MYVIMRC source $MYVIMRC | echom "Reloaded $NVIMRC"
@@ -52,6 +57,12 @@ tnoremap <Esc> <C-\><C-n>
 " type `:wrap` to turn on pretty line wrapping. `unwrap` to turn off
 command Wrap  execute "set wrap linebreak"
 command Unwrap execute "set nowrap nolinebreak"
+
+" use system clipboard by default
+set clipboard+=unnamedplus
+
+" alias :W to :w to fix fat fingers
+command W execute "w"
 
 " use leader as shortcut for splits
 nnoremap <leader>- :split<cr>
@@ -96,6 +107,13 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " ========================== AIRLINE end ==============
 
 
+
+
+" ======================== Coq Start ================
+inoremap <c-J> <Plug>CoqNext
+" ================= Coq End =========================
+
+
 " ============================ COC =====================
 
 let g:coc_global_extensions = [
@@ -104,7 +122,6 @@ let g:coc_global_extensions = [
             \ 'coc-spell-checker',
             \ 'coc-syntax',
             \ 'coc-git', 
-            \ 'coc-python',
             \ 'coc-yaml',
             \ 'coc-rust-analyzer',
             \ 'coc-json',
@@ -112,6 +129,8 @@ let g:coc_global_extensions = [
             \ 'coc-clangd',
             \ 'coc-tsserver',
             \ 'coc-prettier',
+            \ 'coc-tailwindcss',
+            \ 'coc-tsserver',
             \ 'coc-go'
             \]
 
@@ -124,7 +143,7 @@ set nobackup
 set nowritebackup
 
 " Give more space for displaying messages.
-set cmdheight=2
+set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -154,6 +173,9 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 
 " Use <c-space> to trigger completion.
 if has('nvim')
