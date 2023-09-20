@@ -105,7 +105,7 @@ alias scratch="mkdir /tmp/scratch; touch /tmp/scratch/scratch; code /tmp/scratch
 alias scratchn="mkdir /tmp/scratch; touch /tmp/scratch/scratch; nvim /tmp/scratch/scratch"
 
 alias c="cd ~/Dropbox\ \(Brown\)/Brown/Sophomore"
-export PATH="$PATH":"$HOME/Documents/Scripts"
+export PATH="$PATH":"$HOME/dotfiles/Scripts"
 
 # Add Rust package manager dirs to PATH
 export PATH="$PATH":"$HOME/.pub-cache/bin"
