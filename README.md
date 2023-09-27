@@ -16,6 +16,8 @@
     sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     ```
+- tmux `tpm`
+  - `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
 - Gogh (Gnome Terminal Themes)
   - Install Misterioso for dark theme and Google Light for light theme
   - `bash -c "$(wget -qO- https://git.io/vQgMr)"`
@@ -28,9 +30,8 @@
 cd ~
 DIR=path/to/this/directory
 ln -s $DIR/.zshrc ~/.zshrc
-ln -s $DIR/.tmux.conf ~/.tmux.conf
+ln -s $DIR/.tmux.conf ~/.config/tmux/tmux.conf
 ln -s $DIR/init.vim ~/.config/nvim/init.vim
-ln -s $DIR/Snippets ~/Documents/Snippets
 ```
 
 ## Install neovim plugins
