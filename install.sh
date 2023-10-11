@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [[ $EUID -eq 0 ]]; then
   echo "Do not run this script as root, it needs to know the user's home directory" 1>&2
