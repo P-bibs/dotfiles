@@ -125,6 +125,7 @@ ln -s ${dotfile_directory}/.gitconfig ${HOME}/.gitconfig
 
 # create symlinks to binaries
 echo "Creating binary symlinks..."
+mkdir -p ${HOME}/.local/bin
 cd ${HOME}/.local/bin
 ln -sf ${HOME}/Builds/nvim/nvim-linux64/bin/nvim .
 ln -sf ${HOME}/Builds/tmux/tmux .
