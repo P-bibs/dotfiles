@@ -37,8 +37,8 @@ if [ $distro == "ubuntu" ]; then
     echo "Installing zsh..."
     if ! [ -x "$(command -v zsh)" ]; then
       echo 'Error: zsh is not installed.'
-      echo '\tzsh installation on ubuntu varies based on permissions.'
-      echo '\tInstall zsh and then re-run this script to continue.'
+      echo -e '\tzsh installation on ubuntu varies based on permissions.'
+      echo -e '\tInstall zsh and then re-run this script to continue.'
       exit 1
     fi
 
