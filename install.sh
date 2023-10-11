@@ -18,6 +18,8 @@ if [ $distro != "ubuntu" ] && [ $distro != "arch" ]; then
     exit 1
 fi
 
+dotfile_directory=$(readlink -f $dotfile_directory)
+
 # install arch packages
 if [ $distro == "arch" ]; then
   sudo pacman -S zsh tmux neovim ripgrep fzf git-delta bat trash-put
@@ -47,18 +49,22 @@ if [ $distro == "ubuntu" ]; then
     echo "Installing neovim..."
     mkdir -p ${HOME}/Builds/nvim
     cd ${HOME}/Builds/nvim
-    wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
+    wget -q https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
     tar xzf nvim-linux64.tar.gz
 
     # install nodejs
     echo "Installing nodejs..."
-    curl -L https://bit.ly/n-install | bash -s -- -y -n
+    if [ ! -d "${HOME}/n" ]; then
+      curl -L https://bit.ly/n-install | bash -s -- -y -n
+    else
+      echo -e "Already installed, skipping."
+    fi
 
     # install tmux
     echo "Installing tmux..."
     mkdir -p ${HOME}/Builds/tmux
     cd ${HOME}/Builds/tmux
-    wget https://github.com/nelsonenzo/tmux-appimage/releases/download/3.3a/tmux.appimage
+    wget -q https://github.com/nelsonenzo/tmux-appimage/releases/download/3.3a/tmux.appimage
     mv tmux.appimage tmux
     chmod +x tmux
 
@@ -66,21 +72,21 @@ if [ $distro == "ubuntu" ]; then
     echo "Installing delta..."
     mkdir -p ${HOME}/Builds/delta
     cd ${HOME}/Builds/delta
-    wget https://github.com/dandavison/delta/releases/download/0.16.5/delta-0.16.5-x86_64-unknown-linux-gnu.tar.gz
+    wget -q https://github.com/dandavison/delta/releases/download/0.16.5/delta-0.16.5-x86_64-unknown-linux-gnu.tar.gz
     tar xzf delta-0.16.5-x86_64-unknown-linux-gnu.tar.gz
 
     # install bat
     echo "Installing bat..."
     mkdir -p ${HOME}/Builds/bat
     cd ${HOME}/Builds/bat
-    wget https://github.com/sharkdp/bat/releases/download/v0.23.0/bat-v0.23.0-x86_64-unknown-linux-gnu.tar.gz
+    wget -q https://github.com/sharkdp/bat/releases/download/v0.23.0/bat-v0.23.0-x86_64-unknown-linux-gnu.tar.gz
     tar xzf bat-v0.23.0-x86_64-unknown-linux-gnu.tar.gz
 
     # install ripgrep
     echo "Installing ripgrep..."
     mkdir -p ${HOME}/Builds/ripgrep
     cd ${HOME}/Builds/ripgrep
-    wget https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep-13.0.0-x86_64-unknown-linux-musl.tar.gz
+    wget -q https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep-13.0.0-x86_64-unknown-linux-musl.tar.gz
     tar xzf ripgrep-13.0.0-x86_64-unknown-linux-musl.tar.gz
 fi
 
@@ -88,9 +94,15 @@ cd ${HOME}
 
 # install oh my zsh and plugins
 echo "Installing oh-my-zsh..."
-RUNZSH=no sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+if [ ! -d "${HOME}/.oh-my-zsh" ]; then
+  RUNZSH=no sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+else
+  echo -e "Skipping, .oh-my-zsh already exists"
+fi
 rm ${HOME}/.zshrc
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
+  git clone --quiet https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
 
 # install vim-plug
 echo "Installing vim-plug..."
@@ -99,25 +111,29 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 # install tmux plugin manager (tpm)
 echo "Installing tpm..."
-mkdir -p ~/.config/tmux/plugins
-git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+mkdir -p ${HOME}/.config/tmux/plugins
+if [ ! -d "${HOME}/.config/tmux/plugins/tpm" ]; then
+  git clone --quiet https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+else
+  echo "Skipping, already installed"
+fi
 
 # create symlinks to dotfiles
 echo "Creating dotfile symlinks..."
 cd ${HOME}
-ln -s ${dotfile_directory}/.zshrc ${HOME}/.zshrc
-ln -s ${dotfile_directory}/.tmux.conf ${HOME}/.config/tmux/tmux.conf
-ln -s ${dotfile_directory}/init.vim ${HOME}/.config/nvim/init.vim
+ln -sf ${dotfile_directory}/.zshrc ${HOME}/.zshrc
+ln -sf ${dotfile_directory}/.tmux.conf ${HOME}/.config/tmux/tmux.conf
+ln -sf ${dotfile_directory}/init.vim ${HOME}/.config/nvim/init.vim
 ln -s ${dotfile_directory}/.gitconfig ${HOME}/.gitconfig
 
 # create symlinks to binaries
 echo "Creating binary symlinks..."
 cd ${HOME}/.local/bin
-ln -s ${HOME}/Builds/nvim/nvim-linux64/bin/nvim .
-ln -s ${HOME}/Builds/tmux/tmux .
-ln -s ${HOME}/Builds/delta/delta-0.16.5-x86_64-unknown-linux-gnu/delta .
-ln -s ${HOME}/Builds/bat/bat-v0.23.0-x86_64-unknown-linux-gnu/bat .
-ln -s ${HOME}/Builds/ripgrep/ripgrep-13.0.0-x86_64-unknown-linux-musl/rg .
+ln -sf ${HOME}/Builds/nvim/nvim-linux64/bin/nvim .
+ln -sf ${HOME}/Builds/tmux/tmux .
+ln -sf ${HOME}/Builds/delta/delta-0.16.5-x86_64-unknown-linux-gnu/delta .
+ln -sf ${HOME}/Builds/bat/bat-v0.23.0-x86_64-unknown-linux-gnu/bat .
+ln -sf ${HOME}/Builds/ripgrep/ripgrep-13.0.0-x86_64-unknown-linux-musl/rg .
 
 # finishing up steps
 echo "Only a few manual steps left:"
