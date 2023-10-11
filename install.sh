@@ -19,7 +19,7 @@ fi
 
 # install arch packages
 if [ $distro == "arch" ]; then
-  sudo pacman -S zsh tmux neovim ripgrep fzf git-delta bat
+  sudo pacman -S zsh tmux neovim ripgrep fzf git-delta bat trash-put
   mkdir ~/Builds
   cd ~/Builds
   git clone https://aur.archlinux.org/yay.git
