@@ -43,6 +43,10 @@ alias matlabnd="matlab -nojvm -nodisplay -nosplash"
 # opam configuration
 test -r ${HOME}/.opam/opam-init/init.zsh && . ${HOME}/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
+# nodejs version manager (n) configuration
+export N_PREFIX=${HOME}/n
+export PATH="${N_PREFIX}/bin:$PATH"
+
 eval "$(github-copilot-cli alias -- "$0")"
 
 export PATH="${HOME}/.local/bin:$PATH"

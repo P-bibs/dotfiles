@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 if [[ $EUID -eq 0 ]]; then
   echo "Do not run this script as root, it needs to know the user's home directory" 1>&2
@@ -51,7 +52,7 @@ if [ $distro == "ubuntu" ]; then
 
     # install nodejs
     echo "Installing nodejs..."
-    curl -L https://bit.ly/n-install | bash
+    curl -L https://bit.ly/n-install | bash -s -- -y -n
 
     # install tmux
     echo "Installing tmux..."
