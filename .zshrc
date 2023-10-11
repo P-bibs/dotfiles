@@ -6,6 +6,10 @@ ZSH_THEME="agnoster"
 # Automatically update without prompting.
 DISABLE_UPDATE_PROMPT="true"
 
+if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
+  git clone --quiet https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
+
 plugins=(git zsh-autosuggestions wd)
 
 source $ZSH/oh-my-zsh.sh

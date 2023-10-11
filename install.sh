@@ -99,9 +99,6 @@ if [ ! -d "${HOME}/.oh-my-zsh" ]; then
 else
   echo -e "Skipping, .oh-my-zsh already exists"
 fi
-if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
-  git clone --quiet https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-fi
 
 # install vim-plug
 echo "Installing vim-plug..."
