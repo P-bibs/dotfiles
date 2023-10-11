@@ -6,7 +6,7 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 # expect two arguments, directory of this repo and either "ubuntu" or "arch"
-if [ $# -ne 1 ]; then
+if [ $# -ne 2 ]; then
     echo "Usage: ./install.sh <dotfile_directory> <ubuntu|arch>"
     exit 1
 fi
