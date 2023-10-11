@@ -23,8 +23,8 @@ dotfile_directory=$(readlink -f $dotfile_directory)
 # install arch packages
 if [ $distro == "arch" ]; then
   sudo pacman -S zsh tmux neovim ripgrep fzf git-delta bat trash-put
-  mkdir ~/Builds
-  cd ~/Builds
+  mkdir ${HOME}/Builds
+  cd ${HOME}/Builds
   git clone https://aur.archlinux.org/yay.git
   cd yay
   sudo makepkg -si
@@ -51,6 +51,7 @@ if [ $distro == "ubuntu" ]; then
     cd ${HOME}/Builds/nvim
     wget -q https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
     tar xzf nvim-linux64.tar.gz
+    mkdir -p ${HOME}/.config/nvim
 
     # install nodejs
     echo "Installing nodejs..."
@@ -109,7 +110,7 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 echo "Installing tpm..."
 mkdir -p ${HOME}/.config/tmux/plugins
 if [ ! -d "${HOME}/.config/tmux/plugins/tpm" ]; then
-  git clone --quiet https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
+  git clone --quiet https://github.com/tmux-plugins/tpm ${HOME}/.config/tmux/plugins/tpm
 else
   echo "Skipping, already installed"
 fi
