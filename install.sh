@@ -121,7 +121,7 @@ cd ${HOME}
 ln -sf ${dotfile_directory}/.zshrc ${HOME}/.zshrc
 ln -sf ${dotfile_directory}/.tmux.conf ${HOME}/.config/tmux/tmux.conf
 ln -sf ${dotfile_directory}/init.vim ${HOME}/.config/nvim/init.vim
-ln -s ${dotfile_directory}/.gitconfig ${HOME}/.gitconfig
+ln -sf ${dotfile_directory}/.gitconfig ${HOME}/.gitconfig
 
 # create symlinks to binaries
 echo "Creating binary symlinks..."
