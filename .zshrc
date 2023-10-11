@@ -41,11 +41,11 @@ export EDITOR="nvim"
 alias matlabnd="matlab -nojvm -nodisplay -nosplash"
 
 # opam configuration
-test -r /home/paul/.opam/opam-init/init.zsh && . /home/paul/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+test -r ${HOME}/.opam/opam-init/init.zsh && . ${HOME}/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 eval "$(github-copilot-cli alias -- "$0")"
 
-export PATH="/home/paul/.local/bin:$PATH"
+export PATH="${HOME}/.local/bin:$PATH"
 
 alias please='echo $(fc -ln -1) ; sudo $(fc -ln -1)'
 alias scratch="mkdir /tmp/scratch; touch /tmp/scratch/scratch; code /tmp/scratch"
