@@ -135,5 +135,5 @@ ln -sf ${HOME}/Builds/ripgrep/ripgrep-13.0.0-x86_64-unknown-linux-musl/rg .
 
 # finishing up steps
 echo "Only a few manual steps left:"
-echo "1. Change your shell to zsh using `chsh`"
+echo "1. Change your shell to zsh using \`chsh\`"
 echo "2. Relogin to make sure changes take effect"
