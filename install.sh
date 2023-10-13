@@ -55,10 +55,14 @@ if [ $distro == "ubuntu" ]; then
 
     # install nodejs
     echo "Installing nodejs..."
-    if [ ! -d "${HOME}/n" ]; then
-      curl -L https://bit.ly/n-install | bash -s -- -y -n
+    if [ ! $(type -P "node") ]; then
+      if [ ! -d "${HOME}/n" ]; then
+        curl -L https://bit.ly/n-install | bash -s -- -y -n
+      else
+        echo -e "n version manager already installed, skipping."
+      fi
     else
-      echo -e "Already installed, skipping."
+      echo -e "Nodejs already installed, skipping."
     fi
 
     # install tmux
@@ -96,7 +100,7 @@ cd ${HOME}
 # install oh my zsh and plugins
 echo "Installing oh-my-zsh..."
 if [ ! -d "${HOME}/.oh-my-zsh" ]; then
-  RUNZSH=no sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 else
   echo -e "Skipping, .oh-my-zsh already exists"
 fi
