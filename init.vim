@@ -97,19 +97,20 @@ nnoremap <A-p> :Commands<cr>
 " ========================== AIRLINE ==================
 let g:airline_powerline_fonts = 1
 
-" fix to allow powerline symbols to wor
+" fix to allow powerline symbols to work
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
 
 let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+let g:airline#extensions#tabline#enabled = 1
 " ========================== AIRLINE end ==============
 
 
-
-
 " ======================== Coq Start ================
+let g:coqtail_noimap = 1
 inoremap <c-J> <Plug>CoqNext
 " ================= Coq End =========================
 
