@@ -77,15 +77,15 @@ if [ $distro == "ubuntu" ]; then
     echo "Installing delta..."
     mkdir -p ${HOME}/Builds/delta
     cd ${HOME}/Builds/delta
-    wget -q https://github.com/dandavison/delta/releases/download/0.16.5/delta-0.16.5-x86_64-unknown-linux-gnu.tar.gz
-    tar xzf delta-0.16.5-x86_64-unknown-linux-gnu.tar.gz
+    wget -q https://github.com/dandavison/delta/releases/download/0.16.5/delta-0.16.5-x86_64-unknown-linux-musl.tar.gz
+    tar xzf delta-0.16.5-x86_64-unknown-linux-musl.tar.gz
 
     # install bat
     echo "Installing bat..."
     mkdir -p ${HOME}/Builds/bat
     cd ${HOME}/Builds/bat
-    wget -q https://github.com/sharkdp/bat/releases/download/v0.23.0/bat-v0.23.0-x86_64-unknown-linux-gnu.tar.gz
-    tar xzf bat-v0.23.0-x86_64-unknown-linux-gnu.tar.gz
+    wget -q https://github.com/sharkdp/bat/releases/download/v0.24.0/bat-v0.24.0-x86_64-unknown-linux-musl.tar.gz
+    tar xzf bat-v0.24.0-x86_64-unknown-linux-musl.tar.gz
 
     # install ripgrep
     echo "Installing ripgrep..."
@@ -133,8 +133,8 @@ mkdir -p ${HOME}/.local/bin
 cd ${HOME}/.local/bin
 ln -sf ${HOME}/Builds/nvim/nvim-linux64/bin/nvim .
 ln -sf ${HOME}/Builds/tmux/tmux .
-ln -sf ${HOME}/Builds/delta/delta-0.16.5-x86_64-unknown-linux-gnu/delta .
-ln -sf ${HOME}/Builds/bat/bat-v0.23.0-x86_64-unknown-linux-gnu/bat .
+ln -sf ${HOME}/Builds/delta/delta-0.16.5-x86_64-unknown-linux-musl/delta .
+ln -sf ${HOME}/Builds/bat/bat-v0.24.0-x86_64-unknown-linux-musl/bat .
 ln -sf ${HOME}/Builds/ripgrep/ripgrep-13.0.0-x86_64-unknown-linux-musl/rg .
 
 # finishing up steps

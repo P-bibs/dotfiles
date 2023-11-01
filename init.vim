@@ -58,9 +58,6 @@ tnoremap <Esc> <C-\><C-n>
 command Wrap  execute "set wrap linebreak"
 command Unwrap execute "set nowrap nolinebreak"
 
-" use system clipboard by default
-set clipboard+=unnamedplus
-
 " alias :W to :w to fix fat fingers
 command W execute "w"
 
